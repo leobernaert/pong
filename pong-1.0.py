@@ -23,11 +23,13 @@ pygame.init()
 fps = pygame.time.Clock()
 
 #colors #couleurs
-WHITE = (255,255,255)
-RED = (255,0,0)
-GREEN = (0,255,0)
-BLACK = (0,0,0)
-
+WHITE = (225,225,225)
+RED = (0,0,0)
+""" on a changé la couleur de la balle en noir a la place du rouge"""
+GREEN = (0,0,0)
+""" on  a changé la couleur des raquettes en noir la place du vert"""
+BLACK = (0,250,100)
+""" on a changé la couleur du fond en ver fluo a la place du noir"""
 #globals #global
 WIDTH = 600
 HEIGHT = 400       
@@ -100,7 +102,7 @@ def draw(canvas):
 
     # update paddle's vertical position, keep paddle on the screen
     """
-    mise à jour de la position verticale de la palette, garder la palette à l'écran
+    mise à jour de la position verticale de la raquette, garder la palette à l'écran
     """
     if paddle1_pos[1] > HALF_PAD_HEIGHT and paddle1_pos[1] < HEIGHT - HALF_PAD_HEIGHT:
         paddle1_pos[1] += int(paddle1_vel)
@@ -173,8 +175,9 @@ def draw(canvas):
     canvas.blit(label2, (470, 20))  
     
     
-#keydown handler
+#keydown handler 
 """
+touche bas gestionnaire
 """
 def keydown(event):
     global paddle1_vel, paddle2_vel
@@ -183,16 +186,20 @@ def keydown(event):
         paddle2_vel = -8
     elif event.key == K_DOWN:
         paddle2_vel = 8
+        """ changement de la touche w initiale par la touche z afin de permettre a la raquette 1 d'être dirigée par les touches z et s"""
     elif event.key == K_z:
         paddle1_vel = -8
     elif event.key == K_s:
         paddle1_vel = 8
 
 #keyup handler
+"""
+touche haute gestionnaire
+"""
 def keyup(event):
     global paddle1_vel, paddle2_vel
     
-    if event.key in (K_w, K_s):
+    if event.key in (K_z, K_s):
         paddle1_vel = 0
     elif event.key in (K_UP, K_DOWN):
         paddle2_vel = 0
@@ -201,6 +208,9 @@ init()
 
 
 #game loop
+"""
+boucle de jeu
+"""
 while True:
 
     draw(window)
