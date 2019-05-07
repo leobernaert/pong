@@ -23,12 +23,13 @@ pygame.init()
 fps = pygame.time.Clock()
 
 #colors #couleurs
-WHITE = (250,250,250)
-RED = (250,250,250)
-""" on a changé la couleur de la balle en blanc a la place du rouge"""
-GREEN = (250,250,250)
-""" on  a changé la couleur des raquettes en blanc la place du vert"""
-BLACK = (0,0,0)
+WHITE = (128,0,128)
+""" on a changé les lignes en violet"""
+RED = (22,184,78)
+""" on a changé la couleur de la balle en vert menthe a la place du rouge"""
+GREEN = (212,115,121)
+""" on  a changé la couleur des raquettes en mauve la place du vert"""
+BLACK = (135,89,26)
 
 
 #globals #global
