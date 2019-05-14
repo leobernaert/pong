@@ -23,10 +23,10 @@ pygame.init()
 fps = pygame.time.Clock()
 
 #colors #couleurs
-WHITE = (250,250,250)
-RED = (250,250,250)
-GREEN = (250,250,250)
-BLACK = (0,0,0)
+WHITE = (255,255,255)
+RED = (255,0,0)
+GREEN = (0,225,0)
+BLACK= (0,0,0)
 
 #globals #global
 WIDTH = 600
@@ -42,7 +42,8 @@ paddle1_vel = 0
 paddle2_vel = 0
 l_score = 0
 r_score = 0
-change_sens=False
+change_sens_1=False
+change_sens_2=False
 
 #canvas declaration #déclaration de toile
 window = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
@@ -180,21 +181,21 @@ def draw(canvas):
 def keydown(event):
     global paddle1_vel, paddle2_vel
     
-    if event.key == K_UP and not change_sens:
+    if event.key == K_UP and not change_sens_2:
         paddle2_vel = -8
-    elif event.key == K_UP and change_sens:
+    elif event.key == K_UP and change_sens_2:
         paddle2_vel = 8
-    elif event.key == K_DOWN and not  change_sens:
+    elif event.key == K_DOWN and not  change_sens_2:
         paddle2_vel = 8
-    elif event.key == K_DOWN and  change_sens:
+    elif event.key == K_DOWN and  change_sens_2:
         paddle2_vel = -8
-    elif event.key == K_z and not change_sens:
+    elif event.key == K_z and not change_sens_1:
         paddle1_vel = -8
-    elif event.key == K_z and change_sens:
+    elif event.key == K_z and change_sens_1:
         paddle1_vel = 8
-    elif event.key == K_s and not change_sens:
+    elif event.key == K_s and not change_sens_1:
         paddle1_vel = 8
-    elif event.key == K_s and change_sens:
+    elif event.key == K_s and change_sens_1:
         paddle1_vel = -8    
 #keyup handler
 def keyup(event):
@@ -213,11 +214,16 @@ init()
 while True:
 
     draw(window)
-    if l_score >= r_score + 5 or r_score >= l_score + 5:
-        change_sens=True
-
+    if l_score >= r_score + 2:
+        change_sens_1=True
+    elif r_score >= l_score + 2:
+        change_sens_2=True
+    else:
+        change_sens_1=False
+        change_sens_2=False
+            
     for event in pygame.event.get():
-
+        
         if event.type == KEYDOWN:
             keydown(event)
         elif event.type == KEYUP:
@@ -225,6 +231,10 @@ while True:
         elif event.type == QUIT:
             pygame.quit()
             sys.exit()
+        
             
+     
     pygame.display.update()
     fps.tick(60)
+    
+    
